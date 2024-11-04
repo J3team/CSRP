@@ -86,29 +86,51 @@
         li {
             padding: 5px 0;
         }
+        /* Admin Panel Styles */
+        .admin-panel {
+            display: none;
+            margin-top: 30px;
+        }
+        .login-form {
+            margin: 20px 0;
+        }
+        .login-form input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .login-form button {
+            background-color: #5a6ebc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #7289DA;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Logo Section -->
         <img src="https://cdn.discordapp.com/attachments/1303114419290509483/1303114456993370163/IMG_3465.webp?ex=672a9369&is=672941e9&hm=94a71225ac600cb35c7ae94a1ada9a40e4cad5e3b3b7678020461f8e37997053&" alt="California Roleplay Logo">
 
-        <!-- Navigation Menu -->
         <div class="nav">
             <button onclick="openTab('home')">Home</button>
             <button onclick="openTab('staff')">Staff Team</button>
             <button onclick="openTab('departments')">Departments</button>
+            <button onclick="showAdminPanel()">Admin Panel</button>
         </div>
 
-        <!-- Home Tab Content -->
         <div id="home" class="content active">
             <h1>Welcome to California Roleplay!</h1>
             <p>Join our roleplaying community where you can become part of law enforcement, have fun, and experience immersive roleplay scenarios in California.</p>
             <a href="https://discord.gg/HEWuD588" class="join-btn">Join Our Discord</a>
         </div>
 
-        <!-- Staff Team Tab Content -->
         <div id="staff" class="content">
             <h2>Our Staff Team</h2>
             <p>We have a dedicated and professional staff team to ensure the best roleplay experience for all members.</p>
@@ -120,7 +142,6 @@
             </ul>
         </div>
 
-        <!-- Departments Tab Content -->
         <div id="departments" class="content">
             <h2>Our Departments</h2>
             <ul>
@@ -140,23 +161,57 @@
             <a href="https://discord.gg/cHEzZudY" class="join-btn">Apply to Sheriff's Dept.</a>
         </div>
 
-        <!-- Footer Section -->
+        <!-- Admin Panel -->
+        <div class="admin-panel" id="admin-panel">
+            <h2>Admin Panel</h2>
+            <div class="login-form" id="login-form">
+                <input type="text" id="username" placeholder="Username" />
+                <input type="password" id="password" placeholder="Password" />
+                <button onclick="login()">Login</button>
+            </div>
+            <div id="admin-dashboard" style="display: none;">
+                <h3>Dashboard</h3>
+                <p>Admin controls and bot settings will go here.</p>
+                <!-- Add admin controls here -->
+            </div>
+        </div>
+
         <div class="footer">
             <p>© 2024 California Roleplay | Join Us: <a href="https://discord.gg/HEWuD588" style="color: white;">Discord Invite</a></p>
         </div>
     </div>
 
     <script>
-        // Function to open different tabs
         function openTab(tabName) {
-            // Hide all tab content
             var tabs = document.getElementsByClassName("content");
             for (var i = 0; i < tabs.length; i++) {
                 tabs[i].classList.remove("active");
             }
-
-            // Show the selected tab content
             document.getElementById(tabName).classList.add("active");
+            hideAdminPanel();
+        }
+
+        function showAdminPanel() {
+            document.getElementById("admin-panel").style.display = "block";
+        }
+
+        function hideAdminPanel() {
+            document.getElementById("admin-panel").style.display = "none";
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("admin-dashboard").style.display = "none";
+        }
+
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "admin123" && password === "adm212") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("admin-dashboard").style.display = "block";
+                alert("Login successful!");
+            } else {
+                alert("Invalid username or password.");
+            }
         }
     </script>
 
